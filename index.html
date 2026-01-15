@@ -1,0 +1,123 @@
+<!--
+Recordatorio actividad:
+
+Objetivo: Implementar eventos (click, input/change, submit) para modificar cantidades,
+recalcular importes por línea y totales del carrito. Se trabajará con delegación de eventos
+y el parámetro "evt" de addEventListener.
+
+Requisitos mínimos:
+1) Botones +/− por línea para incrementar/decrementar cantidad.
+2) Campo numérico editable por línea (input type="number").
+3) Recalcular importes y totales (subtotal, IVA 21%, total) en cada interacción.
+4) Botón eliminar por línea.
+5) Delegación de eventos en el <tbody> del carrito (un solo manejador para múltiples
+botones/inputs).
+6) Campo de “código descuento” (por ejemplo, DESCUENTO10 aplica 10%).
+7) Inicialización con DOMContentLoaded.
+
+
+Lo primero que he hecho es un index.html basico sin estilos, y con las etiquetas
+que creo necesarias para hacer todo el trabajo mediante eventos.
+
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carrito con eventos</title>
+<script src="./scripts/main.js" defer></script>
+</head>
+<body>
+
+<h1>Carrito con eventos</h1>
+
+<table>
+<thead>
+<tr>
+  <th>Producto</th>
+  <th>Precio (€)</th>
+  <th>Cantidad</th>
+  <th>Importe (€)</th>
+  <th>Acciones</th>
+</tr>
+</thead>
+
+<tbody id="cart-body">
+
+<tr data-id="1">
+  <td>Colchón Economico</td>
+  <td id="precio1">99.00</td>
+  <td id="colchonEconomico">
+    <div class="cantidad">
+      <button id="btn-menos-1">-</button>
+      <input type="number" id="cantidad1" value="1" min="0">
+      <button id="btn-mas-1">+</button>
+    </div>
+  </td>
+  <td id="importe1">0.00</td>
+  <td><button id="btn-eliminar1">Eliminar</button></td>
+</tr>
+
+<tr data-id="2">
+  <td>Colchón Confort</td>
+  <td id="precio2">199.00</td>
+  <td id="colchonConfort">
+    <div class="cantidad">
+      <button id="btn-menos-2">-</button>
+      <input type="number" id="cantidad2" value="1" min="0">
+      <button id="btn-mas-2">+</button>
+    </div>
+  </td>
+  <td id="importe2">0.00</td>
+  <td><button id="btn-eliminar2">Eliminar</button></td>
+</tr>
+
+<tr data-id="3">
+  <td>Colchón Premium</td>
+  <td id="precio3">349.00</td>
+  <td id="colchonesPremiun">
+    <div class="cantidad">
+      <button id="btn-menos-3">-</button>
+      <input type="number" id="cantidad3" value="1" min="0">
+      <button id="btn-mas-3">+</button>
+    </div>
+  </td>
+  <td id="importe3">0.00</td>
+  <td><button id="btn-eliminar3">Eliminar</button></td>
+</tr>
+
+</tbody>
+
+<tfoot>
+<tr>
+  <td colspan="3">Subtotal</td>
+  <td id="subtotal">0.00</td>
+  <td></td>
+</tr>
+<tr>
+  <td colspan="3">IVA (21%)</td>
+  <td id="iva">0.00</td>
+  <td></td>
+</tr>
+<tr>
+  <td colspan="3">Descuento</td>
+  <td id="descuento">0.00</td>
+  <td></td>
+</tr>
+<tr>
+  <td colspan="3">Total</td>
+  <td id="total">0.00</td>
+  <td></td>
+</tr>
+</tfoot>
+</table>
+
+<h3>Código descuento</h3>
+
+<form id="dto-form">
+  <input type="text" id="dto" placeholder="DESCUENTO10">
+  <button type="submit">Aplicar</button>
+</form>
+
+</body>
+</html>
